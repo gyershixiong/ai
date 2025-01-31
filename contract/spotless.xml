@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<spotless>
+    <!-- Java格式化配置 -->
+    <java>
+        <!-- 移除未使用的imports -->
+        <removeUnusedImports/>
+        
+        <!-- 确保文件以新行结束 -->
+        <endWithNewline/>
+        
+        <!-- 修剪尾随空格 -->
+        <trimTrailingWhitespace/>
+        
+        <!-- 替换制表符为空格 -->
+        <replaceTabsWithSpaces/>
+        
+        <!-- 缩进使用4个空格 -->
+        <indent>
+            <spaces>4</spaces>
+        </indent>
+        
+        <!-- 导入顺序配置 -->
+        <importOrder>
+            <order>java,javax,org,com,</order>
+            <splitStaticImports>true</splitStaticImports>
+        </importOrder>
+        
+        <!-- 许可证头部配置 -->
+        <licenseHeader>
+            <content>/*
+ * Copyright (c) $YEAR The Ershixiong Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */</content>
+        </licenseHeader>
+        
+        <!-- Google Java格式化 -->
+        <googleJavaFormat>
+            <version>1.15.0</version>
+            <style>GOOGLE</style>
+        </googleJavaFormat>
+    </java>
+    
+    <!-- XML格式化配置 -->
+    <xml>
+        <includes>
+            <include>pom.xml</include>
+            <include>src/main/resources/**/*.xml</include>
+            <include>src/test/resources/**/*.xml</include>
+        </includes>
+        
+        <!-- 缩进使用4个空格 -->
+        <indent>
+            <spaces>4</spaces>
+        </indent>
+        
+        <!-- 修剪尾随空格 -->
+        <trimTrailingWhitespace/>
+        
+        <!-- 确保文件以新行结束 -->
+        <endWithNewline/>
+    </xml>
+</spotless>

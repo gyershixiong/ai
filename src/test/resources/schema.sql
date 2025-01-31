@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS world;
+USE world;
+
+CREATE TABLE IF NOT EXISTS city (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    countrycode CHAR(3) NOT NULL,
+    district VARCHAR(255) NOT NULL,
+    population INT NOT NULL
+);
