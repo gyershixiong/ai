@@ -63,12 +63,12 @@ class CityMapperTest {
    * @return 测试城市数据
    */
   private CityDO createTestCity(String name) {
-    CityDO city = new CityDO();
-    city.setName(name);
-    city.setCountrycode(DEFAULT_COUNTRY_CODE);
-    city.setDistrict(DEFAULT_DISTRICT);
-    city.setPopulation(DEFAULT_POPULATION);
-    return city;
+    return CityDO.builder()
+        .name(name)
+        .countrycode(DEFAULT_COUNTRY_CODE)
+        .district(DEFAULT_DISTRICT)
+        .population(DEFAULT_POPULATION)
+        .build();
   }
 
   /**
@@ -148,8 +148,11 @@ class CityMapperTest {
     @Order(2)
     @DisplayName("当名称为null时应插入失败")
     void testInsert_ShouldFail_WithNullName() {
-      CityDO city = new CityDO();
-      city.setCountrycode(DEFAULT_COUNTRY_CODE);
+      CityDO city = CityDO.builder()
+          .countrycode(DEFAULT_COUNTRY_CODE)
+          .district(DEFAULT_DISTRICT)
+          .population(DEFAULT_POPULATION)
+          .build();
 
       assertThatThrownBy(() -> cityMapper.insert(city))
           .isInstanceOf(DataIntegrityViolationException.class);
@@ -168,8 +171,12 @@ class CityMapperTest {
     @Order(3)
     @DisplayName("当国家代码无效时应插入失败")
     void testInsert_ShouldFail_WithInvalidCountryCode() {
-      CityDO city = createTestCity("Invalid Country Code City");
-      city.setCountrycode(INVALID_COUNTRY_CODE);
+      CityDO city = CityDO.builder()
+          .name("Invalid Country Code City")
+          .countrycode(INVALID_COUNTRY_CODE)
+          .district(DEFAULT_DISTRICT)
+          .population(DEFAULT_POPULATION)
+          .build();
 
       assertThatThrownBy(() -> cityMapper.insert(city))
           .isInstanceOf(DataIntegrityViolationException.class);
@@ -188,8 +195,12 @@ class CityMapperTest {
     @Order(4)
     @DisplayName("当人口数为负数时应插入失败")
     void testInsert_ShouldFail_WithNegativePopulation() {
-      CityDO city = createTestCity("Negative Population City");
-      city.setPopulation(INVALID_POPULATION);
+      CityDO city = CityDO.builder()
+          .name("Negative Population City")
+          .countrycode(DEFAULT_COUNTRY_CODE)
+          .district(DEFAULT_DISTRICT)
+          .population(INVALID_POPULATION)
+          .build();
 
       assertThatThrownBy(() -> cityMapper.insert(city))
           .isInstanceOf(DataIntegrityViolationException.class);
@@ -255,8 +266,13 @@ class CityMapperTest {
     @Order(2)
     @DisplayName("当城市不存在时应返回0")
     void testUpdate_ShouldReturnZero_WhenCityNotExists() {
-      CityDO city = createTestCity("Non-existent City");
-      city.setId(999999L);
+      CityDO city = CityDO.builder()
+          .id(999999L)
+          .name("Non-existent City")
+          .countrycode(DEFAULT_COUNTRY_CODE)
+          .district(DEFAULT_DISTRICT)
+          .population(DEFAULT_POPULATION)
+          .build();
 
       int result = cityMapper.updateById(city);
       assertThat(result).isEqualTo(0);

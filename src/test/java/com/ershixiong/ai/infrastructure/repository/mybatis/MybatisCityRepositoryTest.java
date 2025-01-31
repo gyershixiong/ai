@@ -57,14 +57,15 @@ class MybatisCityRepositoryTest {
     cityRepository = new MybatisCityRepository(cityMapper, cityDataConverter);
 
     // 初始化测试数据
-    testCity = new City();
-    testCity.setId(1L);
-    testCity.setName("Test City");
-    testCity.setCountrycode("CHN");
-    testCity.setDistrict("Test District");
-    testCity.setPopulation(1000000);
+    testCity = City.builder()
+        .id(1L)
+        .name("Test City")
+        .countrycode("CHN")
+        .district("Test District")
+        .population(1000000)
+        .build();
 
-    testCityDO = cityDataConverter.toDO(testCity);
+    testCityDO = testCity.toDO();
   }
 
   @Test

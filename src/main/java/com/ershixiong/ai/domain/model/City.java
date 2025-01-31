@@ -17,6 +17,14 @@ package com.ershixiong.ai.domain.model;
 
 import java.util.Objects;
 
+import com.ershixiong.ai.api.dto.CityDTO;
+import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 城市领域模型。
  *
@@ -34,6 +42,10 @@ import java.util.Objects;
  * @since 1.0.0
  * @date 2025-01-31
  */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class City {
   /** 城市ID 主键，自增长 */
   private Long id;
@@ -50,44 +62,72 @@ public class City {
   /** 城市人口 记录城市的常住人口数量 可以为null，表示未知人口数量 */
   private Integer population;
 
-  public Long getId() {
-    return id;
+  /**
+   * 从 DTO 创建领域对象
+   *
+   * @param dto CityDTO对象
+   * @return City领域对象
+   */
+  public static City from(CityDTO dto) {
+    if (dto == null) {
+      return null;
+    }
+    return City.builder()
+        .id(dto.getId())
+        .name(dto.getName())
+        .countrycode(dto.getCountrycode())
+        .district(dto.getDistrict())
+        .population(dto.getPopulation())
+        .build();
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  /**
+   * 从 DO 创建领域对象
+   *
+   * @param cityDO CityDO对象
+   * @return City领域对象
+   */
+  public static City from(CityDO cityDO) {
+    if (cityDO == null) {
+      return null;
+    }
+    return City.builder()
+        .id(cityDO.getId())
+        .name(cityDO.getName())
+        .countrycode(cityDO.getCountrycode())
+        .district(cityDO.getDistrict())
+        .population(cityDO.getPopulation())
+        .build();
   }
 
-  public String getName() {
-    return name;
+  /**
+   * 转换为 DTO
+   *
+   * @return CityDTO对象
+   */
+  public CityDTO toDTO() {
+    return CityDTO.builder()
+        .id(this.id)
+        .name(this.name)
+        .countrycode(this.countrycode)
+        .district(this.district)
+        .population(this.population)
+        .build();
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getCountrycode() {
-    return countrycode;
-  }
-
-  public void setCountrycode(String countrycode) {
-    this.countrycode = countrycode;
-  }
-
-  public String getDistrict() {
-    return district;
-  }
-
-  public void setDistrict(String district) {
-    this.district = district;
-  }
-
-  public Integer getPopulation() {
-    return population;
-  }
-
-  public void setPopulation(Integer population) {
-    this.population = population;
+  /**
+   * 转换为 DO
+   *
+   * @return CityDO对象
+   */
+  public CityDO toDO() {
+    return CityDO.builder()
+        .id(this.id)
+        .name(this.name)
+        .countrycode(this.countrycode)
+        .district(this.district)
+        .population(this.population)
+        .build();
   }
 
   @Override

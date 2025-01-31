@@ -15,48 +15,87 @@
  */
 package com.ershixiong.ai.infrastructure.repository.mybatis.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.ershixiong.ai.domain.model.City;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
-import java.util.List;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
 
-/** 城市数据对象转换器 负责 DO 和领域实体之间的转换 */
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface CityDataConverter {
-
-  /**
-   * 将 DO 转换为领域实体
-   *
-   * @param cityDO 城市DO
-   * @return 城市实体
-   */
-  City toEntity(CityDO cityDO);
+/**
+ * 城市数据对象转换器。
+ *
+ * <p>负责在领域层和基础设施层之间转换城市对象：
+ * <ul>
+ *   <li>将领域模型 City 转换为数据对象 CityDO
+ *   <li>将数据对象 CityDO 转换为领域模型 City
+ * </ul>
+ *
+ * @author ershixiong
+ * @since 1.0.0
+ * @date 2025-01-31
+ */
+@Component
+public class CityDataConverter {
 
   /**
-   * 将领域实体转换为 DO
+   * 将城市领域模型转换为数据对象。
    *
-   * @param city 城市实体
-   * @return 城市DO
+   * @param city 城市领域模型
+   * @return 城市数据对象，如果输入为null则返回null
    */
-  CityDO toDO(City city);
+  public CityDO toDO(City city) {
+    if (city == null) {
+      return null;
+    }
+    return city.toDO();
+  }
 
   /**
-   * 将 DO 列表转换为实体列表
+   * 将城市数据对象转换为领域模型。
    *
-   * @param cityDOs DO列表
-   * @return 实体列表
+   * @param cityDO 城市数据对象
+   * @return 城市领域模型，如果输入为null则返回null
    */
-  List<City> toEntityList(List<CityDO> cityDOs);
+  public City toEntity(CityDO cityDO) {
+    if (cityDO == null) {
+      return null;
+    }
+    return City.from(cityDO);
+  }
 
   /**
-   * 将实体列表转换为 DO 列表
+   * 将城市领域模型列表转换为数据对象列表。
    *
-   * @param cities 实体列表
-   * @return DO列表
+   * @param cities 城市领域模型列表
+   * @return 城市数据对象列表，如果输入为null则返回null
    */
-  List<CityDO> toDOList(List<City> cities);
+  public List<CityDO> toDOList(List<City> cities) {
+    if (cities == null) {
+      return null;
+    }
+    List<CityDO> cityDOs = new ArrayList<>();
+    for (City city : cities) {
+      cityDOs.add(toDO(city));
+    }
+    return cityDOs;
+  }
+
+  /**
+   * 将城市数据对象列表转换为领域模型列表。
+   *
+   * @param cityDOs 城市数据对象列表
+   * @return 城市领域模型列表，如果输入为null则返回null
+   */
+  public List<City> toEntityList(List<CityDO> cityDOs) {
+    if (cityDOs == null) {
+      return null;
+    }
+    List<City> cities = new ArrayList<>();
+    for (CityDO cityDO : cityDOs) {
+      cities.add(toEntity(cityDO));
+    }
+    return cities;
+  }
 }

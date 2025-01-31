@@ -98,10 +98,8 @@ public class CityController {
     Page<City> result =
         cityApplicationService.searchByName(
             request.getName(), request.getPageNo(), request.getPageSize());
-    List<CityDTO> dtos = result.getRecords().stream().map(cityConverter::toDTO).toList();
-    PageResponse<CityDTO> pageResponse =
-        PageResponse.of(dtos, result.getTotal(), request.getPageNo(), request.getPageSize());
-    return Result.success(pageResponse);
+    List<CityDTO> dtos = cityConverter.toDTOList(result.getRecords());
+    return Result.success(PageResponse.of(dtos, result.getTotal(), (int)result.getCurrent(), (int)result.getSize()));
   }
 
   /**

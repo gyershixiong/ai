@@ -15,83 +15,87 @@
  */
 package com.ershixiong.ai.application.converter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.ershixiong.ai.api.dto.CityDTO;
 import com.ershixiong.ai.domain.model.City;
-import java.util.List;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
 
 /**
  * 城市对象转换器。
  *
- * <p>负责不同层次间城市对象的转换，包括：
- *
+ * <p>负责在应用层和领域层之间转换城市对象：
  * <ul>
- *   <li>DTO与领域对象的互转
- *   <li>请求对象到领域对象的转换
- *   <li>分页对象的转换
+ *   <li>将领域模型 City 转换为数据传输对象 CityDTO
+ *   <li>将数据传输对象 CityDTO 转换为领域模型 City
  * </ul>
- *
- * <p>转换规则：
- *
- * <ul>
- *   <li>保持属性名称一致时自动映射
- *   <li>不同名称的属性通过@Mapping注解指定
- *   <li>复杂对象通过自定义方法转换
- * </ul>
- *
- * <p>使用MapStruct自动生成实现类。
  *
  * @author ershixiong
  * @since 1.0.0
  * @date 2025-01-31
  */
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface CityConverter {
+@Component
+public class CityConverter {
 
   /**
-   * 将实体转换为DTO
+   * 将城市领域模型转换为DTO。
    *
-   * @param city 城市实体
-   * @return 城市DTO
+   * @param city 城市领域模型
+   * @return 城市DTO，如果输入为null则返回null
    */
-  @Mapping(target = "id", source = "id")
-  @Mapping(target = "name", source = "name")
-  @Mapping(target = "countrycode", source = "countrycode")
-  @Mapping(target = "district", source = "district")
-  @Mapping(target = "population", source = "population")
-  CityDTO toDTO(City city);
+  public CityDTO toDTO(City city) {
+    if (city == null) {
+      return null;
+    }
+    return city.toDTO();
+  }
 
   /**
-   * 将DTO转换为实体
+   * 将城市DTO转换为领域模型。
    *
-   * @param cityDTO 城市DTO
-   * @return 城市实体
+   * @param dto 城市DTO
+   * @return 城市领域模型，如果输入为null则返回null
    */
-  @Mapping(target = "id", source = "id")
-  @Mapping(target = "name", source = "name")
-  @Mapping(target = "countrycode", source = "countrycode")
-  @Mapping(target = "district", source = "district")
-  @Mapping(target = "population", source = "population")
-  City toEntity(CityDTO cityDTO);
+  public City toEntity(CityDTO dto) {
+    if (dto == null) {
+      return null;
+    }
+    return City.from(dto);
+  }
 
   /**
-   * 将实体列表转换为DTO列表
+   * 将城市领域模型列表转换为DTO列表。
    *
-   * @param cities 城市实体列表
-   * @return 城市DTO列表
+   * @param cities 城市领域模型列表
+   * @return 城市DTO列表，如果输入为null则返回null
    */
-  List<CityDTO> toDTOList(List<City> cities);
+  public List<CityDTO> toDTOList(List<City> cities) {
+    if (cities == null) {
+      return null;
+    }
+    List<CityDTO> dtos = new ArrayList<>();
+    for (City city : cities) {
+      dtos.add(toDTO(city));
+    }
+    return dtos;
+  }
 
   /**
-   * 将DTO列表转换为实体列表
+   * 将城市DTO列表转换为领域模型列表。
    *
-   * @param cityDTOs 城市DTO列表
-   * @return 城市实体列表
+   * @param dtos 城市DTO列表
+   * @return 城市领域模型列表，如果输入为null则返回null
    */
-  List<City> toEntityList(List<CityDTO> cityDTOs);
+  public List<City> toEntityList(List<CityDTO> dtos) {
+    if (dtos == null) {
+      return null;
+    }
+    List<City> cities = new ArrayList<>();
+    for (CityDTO dto : dtos) {
+      cities.add(toEntity(dto));
+    }
+    return cities;
+  }
 }

@@ -18,14 +18,37 @@ package com.ershixiong.ai.infrastructure.repository.mybatis.dataobject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.util.Objects;
 
-/** 城市数据对象(Data Object) 用于与数据库表进行映射的对象，属于基础设施层 */
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * 城市数据对象。
+ *
+ * <p>该类是数据库表的映射对象，包含以下属性：
+ *
+ * <ul>
+ *   <li>id: 城市唯一标识
+ *   <li>name: 城市名称
+ *   <li>countrycode: 国家代码
+ *   <li>district: 地区
+ *   <li>population: 人口数量
+ * </ul>
+ *
+ * @author ershixiong
+ * @since 1.0.0
+ * @date 2025-01-31
+ */
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("city")
 public class CityDO {
-
   /** 城市ID */
-  @TableId(type = IdType.AUTO)
+  @TableId(value = "id", type = IdType.AUTO)
   private Long id;
 
   /** 城市名称 */
@@ -34,89 +57,9 @@ public class CityDO {
   /** 国家代码 */
   private String countrycode;
 
-  /** 地区 */
+  /** 城市所属行政区 */
   private String district;
 
-  /** 人口数量 */
+  /** 城市人口 */
   private Integer population;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getCountrycode() {
-    return countrycode;
-  }
-
-  public void setCountrycode(String countrycode) {
-    this.countrycode = countrycode;
-  }
-
-  public String getDistrict() {
-    return district;
-  }
-
-  public void setDistrict(String district) {
-    this.district = district;
-  }
-
-  public Integer getPopulation() {
-    return population;
-  }
-
-  public void setPopulation(Integer population) {
-    this.population = population;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    CityDO cityDO = (CityDO) o;
-    return Objects.equals(id, cityDO.id)
-        && Objects.equals(name, cityDO.name)
-        && Objects.equals(countrycode, cityDO.countrycode)
-        && Objects.equals(district, cityDO.district)
-        && Objects.equals(population, cityDO.population);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, countrycode, district, population);
-  }
-
-  @Override
-  public String toString() {
-    return "CityDO{"
-        + "id="
-        + id
-        + ", name='"
-        + name
-        + '\''
-        + ", countrycode='"
-        + countrycode
-        + '\''
-        + ", district='"
-        + district
-        + '\''
-        + ", population="
-        + population
-        + '}';
-  }
 }
