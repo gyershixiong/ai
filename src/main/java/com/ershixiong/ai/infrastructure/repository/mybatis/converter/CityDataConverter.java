@@ -15,13 +15,12 @@
  */
 package com.ershixiong.ai.infrastructure.repository.mybatis.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.ershixiong.ai.domain.model.City;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 城市数据对象转换器。

@@ -15,15 +15,14 @@
  */
 package com.ershixiong.ai.domain.model;
 
-import java.util.Objects;
-
 import com.ershixiong.ai.api.dto.CityDTO;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Objects;
 
 /**
  * 城市领域模型。

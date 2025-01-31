@@ -24,10 +24,11 @@ import com.ershixiong.ai.domain.repository.CityRepository;
 import com.ershixiong.ai.infrastructure.repository.mybatis.converter.CityDataConverter;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
 import com.ershixiong.ai.infrastructure.repository.mybatis.mapper.CityMapper;
-import java.util.List;
-import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * MyBatis实现的城市仓储类。

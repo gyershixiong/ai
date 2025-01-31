@@ -26,8 +26,9 @@ import com.ershixiong.ai.common.Result;
 import com.ershixiong.ai.common.page.PageResponse;
 import com.ershixiong.ai.domain.model.City;
 import jakarta.validation.Valid;
-import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 城市资源控制器，处理所有与城市相关的HTTP请求。

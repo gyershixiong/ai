@@ -15,13 +15,12 @@
  */
 package com.ershixiong.ai.application.converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.ershixiong.ai.api.dto.CityDTO;
 import com.ershixiong.ai.domain.model.City;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 城市对象转换器。

@@ -15,10 +15,6 @@
  */
 package com.ershixiong.ai.infrastructure.repository.mybatis;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ershixiong.ai.common.exception.BusinessException;
@@ -27,24 +23,31 @@ import com.ershixiong.ai.domain.repository.CityRepository;
 import com.ershixiong.ai.infrastructure.repository.mybatis.converter.CityDataConverter;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
 import com.ershixiong.ai.infrastructure.repository.mybatis.mapper.CityMapper;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class MybatisCityRepositoryTest {
+class MyBatisCityRepositoryTest {
 
-  @Mock private CityMapper cityMapper;
+  @MockitoBean
+  private CityMapper cityMapper;
 
-  @Autowired private CityDataConverter cityDataConverter;
+  @Autowired
+  private CityDataConverter cityDataConverter;
 
   private CityRepository cityRepository;
 

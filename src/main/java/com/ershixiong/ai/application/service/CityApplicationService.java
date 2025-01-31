@@ -20,10 +20,11 @@ import com.ershixiong.ai.common.exception.BusinessException;
 import com.ershixiong.ai.common.exception.ErrorCode;
 import com.ershixiong.ai.domain.model.City;
 import com.ershixiong.ai.domain.repository.CityRepository;
-import java.util.List;
-import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 城市应用服务。
