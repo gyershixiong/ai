@@ -19,14 +19,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ershixiong.ai.infrastructure.repository.mybatis.dataobject.CityDO;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 /*
@@ -70,26 +72,6 @@ class CityMapperTest {
         .population(DEFAULT_POPULATION)
         .build();
   }
-
-  /**
-   * 测试数据初始化。
-   *
-   * <p>在每个测试方法执行前：
-   *
-   * <ul>
-   *   <li>创建一个新的测试城市数据
-   *   <li>插入到数据库中
-   *   <li>验证插入是否成功
-   * </ul>
-   */
-  @BeforeEach
-  void setUp() {
-    // 每个测试前插入一个测试数据
-    CityDO testCity = createTestCity("Test City");
-    cityMapper.insert(testCity);
-    assertNotNull(testCity.getId(), "City ID should not be null after insertion");
-  }
-
   /**
    * 插入测试组。
    *

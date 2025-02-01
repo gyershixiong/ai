@@ -1,12 +1,8 @@
 package com.ershixiong.ai.api.controller;
 
-import com.ershixiong.ai.application.converter.CityConverter;
 import com.ershixiong.ai.application.service.CityApplicationService;
 import com.ershixiong.ai.domain.model.City;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,9 +24,6 @@ public class CityControllerTest {
 
     @MockitoBean
     private CityApplicationService cityApplicationService;
-
-    @Autowired
-    private CityConverter cityConverter;
 
     @Test
     public void getCityById_ValidId_ReturnsCityDTO() throws Exception {
